@@ -21,7 +21,7 @@ def tronque_spoil(contenu, nb_chapitre_max):
     print("barrière anti spoil déployée !")
     return retour
 
-def test():
+def test(significatif_occ = 0, significatif_freq = 0., significatif_par_chap = 0, nb_chapitre = NB_CHAPITRE_NO_SPOIL):
     stop_words_fr = [
         "le", "la", "les", "de", "des", "du", "un", "une",
         "et", "en", "dans", "au", "aux", "ce", "cet", "cette",
@@ -59,10 +59,6 @@ def test():
     sizefreq = 20
     sizeocc = 18
     size1 = 7
-    significatif_occ = 10
-    significatif_freq = 0
-    significati_par_chap = 3
-    nb_chapitre = NB_CHAPITRE_NO_SPOIL
 
     print("indice | mot               | fréquence            | nombre d'occurence | fréquence par chapitre\n")
     for i in range(len(mots_portion_sorted)):
@@ -95,7 +91,7 @@ def test():
             break
 
         occur_chap = occur / nb_chapitre
-        if occur_chap < significati_par_chap:
+        if occur_chap < significatif_par_chap:
             print("nombre d'occurence par chapitre trop faible")
             break
 
@@ -105,4 +101,4 @@ def test():
 
         print(f"n°{i + 1}{espace}| {mot} | {freq} | {occur} | {occur_chap}")
 if __name__ == "__main__":
-    test()
+    test(significatif_occ = 10, significatif_freq = 0.1, significatif_par_chap = 2, nb_chapitre = NB_CHAPITRE_NO_SPOIL)

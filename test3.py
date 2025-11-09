@@ -129,7 +129,7 @@ def similarite(doc, doc2):
     return doc.similarity(doc)
 
 if __name__ == "__main__":
-    langage_parser = init_nlp()
-    doc1 = make_doc(langage_parser, caractere_a_remplacer={"\n" : " "})
+    langage_parser = init_nlp(ponctuation = (".", "!", "?", "...", "«", "»", "\n"))
+    doc1 = make_doc(langage_parser, caractere_invalide = ("«", "»", "\"", "(", ")"), caractere_a_remplacer= {"\n" : " "})
     test_similarite(langage_parser, doc1)
     print(f"\nPersonnages : {test_nommees(doc1, 'PER')}")
