@@ -128,4 +128,4 @@ def similarite(doc, doc2):
 langage_parser = init_nlp()
 doc1 = make_doc(langage_parser)
 test_similarite(langage_parser, doc1)
-print(f"\nPersonnage : {test_nommees(doc1, 'PER')}")
+print(f"\nPersonnages : {test_nommees(doc1, 'PER')}")
