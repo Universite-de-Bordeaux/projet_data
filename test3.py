@@ -3,7 +3,6 @@ from random import randint
 import spacy
 from spacy.language import Language
 from spacy.pipeline import Sentencizer
-
 from test2 import extract_text
 
 # Charger le modèle français
@@ -24,7 +23,7 @@ def factory_name(ponctuation):
         return Sentencizer(punct_chars=ponctuation)
     custom_sentencizer = new_custom_sentencizer
 
-def init_nlp(langage = "fr_core_news_md", ponctuation = (".", "!", "?", "...", "«", "»")):
+def init_nlp(langage = "fr_core_news_md", ponctuation = (".", "!", "?", "...", "«", "»", "\n")):
     """
     Crée un nouveau parseur de langage
     :param langage: le langage du parseur (en français, il s'agit de fr_core_news_ + (sm, md ou lg)
@@ -39,17 +38,19 @@ def init_nlp(langage = "fr_core_news_md", ponctuation = (".", "!", "?", "...", "
     nlp.add_pipe("custom_sentencizer", first=True)
     return nlp
 
-def make_doc(nlp, caractere_invalide = ("«", "»", "\"", "\n", "-", "(", ")"),
+def make_doc(nlp, caractere_invalide = ("«", "»", "\"", "(", ")"), caractere_a_remplacer = {"\n" : " "},
              Filename : str = "Partie 1 Luc et Mélissa.txt", extension = ".txt"):
     """
     Créer un document spacy
     :param nlp: le parseur de langage
     :param caractere_invalide: les caractères à suprimmer du document
+    :param caractere_a_remplacer : les caractères à remplacer du document
     :param Filename: le nom du fichier où se trouvent les informations
     :param extension: le type d'extension du fichier
     :return: un document spacy
     :type nlp: spacy.lang.fr.French
     :type caractere_invalide: Iterable[str] | list[str] | tuple[str]
+    :type caractere_a_remplacer: dict[str, str] | None
     :type Filename: str
     :type extension: str
     :rtype: spacy.tokens.doc.Doc
@@ -60,7 +61,9 @@ def make_doc(nlp, caractere_invalide = ("«", "»", "\"", "\n", "-", "(", ")"),
         brut = "Pas encore codé mdr"
     text_filtre = ""
     for l in brut:
-        if l not in caractere_invalide:
+        if l in caractere_a_remplacer:
+            text_filtre += caractere_a_remplacer[l]
+        elif l not in caractere_invalide:
             text_filtre += l
     return nlp(text_filtre)
 
@@ -76,9 +79,12 @@ def test_tokens(doc):
 
 def test_similarite(nlp, doc):
     """
-    Une fonction test qui prend deux phrases au pif, les affiches et affiche leur similarité cosinus
+    Une fonction test qui prend deux phrases aléatoirement, les affiches et affiche leur similarité cosinus
     :param nlp: le parseur de langage
     :param doc: le document spacy
+    :type nlp: nlp: spacy.lang.fr.French
+    :type doc: spacy.tokens.doc.Doc
+    :rtype: None
     """
     i = randint(0, 250)
     j = randint(0, 250)
@@ -100,12 +106,18 @@ def test_similarite(nlp, doc):
 
 def test_nommees(doc, label : str | list[str] | None = None):
     """
-    Renvoie une liste de tout ce qui est considérée comme mot/groupe nominal particulier
+    Renvoie tous les mots classés dans une catégorie particulière nom propre, date, évènements, etc.)
+    :param doc: le document spacy
+    :param label: la ou les catégories particulières voulues
+    :type doc: spacy.lang.fr.French
+    :type label: str | list[str] | None
+    :rtype: None
     """
     retour = set()
     if label is None:
         for ent in doc.ents:
             retour.add((ent.text, ent.label_))
+        return retour
 
     return {ent.text for ent in doc.ents if ent.label_ in label}
 
@@ -114,18 +126,6 @@ def similarite(doc, doc2):
     return doc.similarity(doc)
 
 langage_parser = init_nlp()
-print(type(langage_parser))
 doc1 = make_doc(langage_parser)
-print(type(doc1))
 test_similarite(langage_parser, doc1)
-
-cC = 0
-c = 0
-for phrase in doc1.doc.sents:
-    c += 1
-    if "Chapitre" in phrase.text:
-        cC += 1
-        if cC == 3:
-            print(phrase.text)
-            print(c)
-            break
+print(test_nommees(doc1, "PER"))
