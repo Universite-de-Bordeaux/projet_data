@@ -104,4 +104,5 @@ def test():
             occur += " "
 
         print(f"n°{i + 1}{espace}| {mot} | {freq} | {occur} | {occur_chap}")
-test()
+if __name__ == "__main__":
+    test()
