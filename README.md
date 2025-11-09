@@ -51,5 +51,5 @@ Nous avons décidé d'enregistrer les données sous le format json de la manièr
 ### Projection PCA interactive
 
 ## Membres du projet
-BRUNEAU Vincent
+BRUNEAU Vincent  
 MARI Micky
