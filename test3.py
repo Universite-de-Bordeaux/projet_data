@@ -96,8 +96,12 @@ def test_similarite(nlp, doc):
         c += 1
         if c == i:
             text_i = str(text)
+            if text_i == "":
+                i += 1
         if c == j:
             text_j = str(text)
+            if text_j == "":
+                j += 1
 
     print(f"text 1 :\n{text_i}\n\n\ntext 2 :\n{text_j}")
     doc2 = nlp(text_i)

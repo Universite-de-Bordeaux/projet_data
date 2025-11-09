@@ -59,9 +59,9 @@ def test():
     sizefreq = 20
     sizeocc = 18
     size1 = 7
-    significatif_occ = 20
+    significatif_occ = 10
     significatif_freq = 0
-    significati_par_chap = 1
+    significati_par_chap = 3
     nb_chapitre = NB_CHAPITRE_NO_SPOIL
 
     print("indice | mot               | fréquence            | nombre d'occurence | fréquence par chapitre\n")
