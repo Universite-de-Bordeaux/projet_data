@@ -38,7 +38,7 @@ def init_nlp(langage = "fr_core_news_md", ponctuation = (".", "!", "?", "...", "
     nlp.add_pipe("custom_sentencizer", first=True)
     return nlp
 
-def make_doc(nlp, caractere_invalide = ("«", "»", "\"", "(", ")"), caractere_a_remplacer = {"\n" : " "},
+def make_doc(nlp, caractere_invalide = ("«", "»", "\"", "(", ")"), caractere_a_remplacer = None,
              Filename : str = "Partie 1 Luc et Mélissa.txt", extension = ".txt"):
     """
     Créer un document spacy
@@ -61,9 +61,9 @@ def make_doc(nlp, caractere_invalide = ("«", "»", "\"", "(", ")"), caractere_a
         brut = "Pas encore codé mdr"
     text_filtre = ""
     for l in brut:
-        if l in caractere_a_remplacer:
+        if caractere_a_remplacer is not None and l in caractere_a_remplacer:
             text_filtre += caractere_a_remplacer[l]
-        elif l not in caractere_invalide:
+        elif caractere_invalide is None or l not in caractere_invalide:
             text_filtre += l
     return nlp(text_filtre)
 
@@ -130,6 +130,6 @@ def similarite(doc, doc2):
     return doc.similarity(doc)
 
 langage_parser = init_nlp()
-doc1 = make_doc(langage_parser)
+doc1 = make_doc(langage_parser, caractere_a_remplacer={"\n" : " "})
 test_similarite(langage_parser, doc1)
 print(f"\nPersonnages : {test_nommees(doc1, 'PER')}")
