@@ -12,11 +12,12 @@ def tronque_spoil(contenu, nb_chapitre_max):
     retour = ""
     j = 0
     for i in range(nb_chapitre_max):
-        j = contenu[j:].find("chapitre", j, len(contenu))
+        j = contenu.find("chapitre", j, len(contenu))
         if j == -1:
             print("aucun spoil détecté")
             return contenu
-        retour += contenu[0:j]
+        retour += contenu[0:j+11]
+        contenu = contenu[j:]
     print("barrière anti spoil déployée !")
     return retour
 
@@ -103,4 +104,3 @@ def test():
             occur += " "
 
         print(f"n°{i + 1}{espace}| {mot} | {freq} | {occur} | {occur_chap}")
-test()
