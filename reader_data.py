@@ -2,7 +2,7 @@
 
 import json
 
-def read_data(filename="comments.json") -> dict:
+def read_data(filename="datas.json") -> dict:
     """Lit les commentaires depuis un fichier JSON et renvoie un dictionnaire."""
     try:
         with open(filename, "r", encoding="utf-16") as f:
