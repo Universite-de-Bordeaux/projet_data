@@ -10,3 +10,5 @@ pip install scikit-learn
 pip install pandas
 pip install numpy
 pip install matplotlib
+pip install spacy
+pip install plotly
