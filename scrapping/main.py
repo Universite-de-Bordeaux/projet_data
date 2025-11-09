@@ -13,9 +13,7 @@ def main()->list[str]:
 
     # URLs à scrapper
     slugs = [slug for slug in liste_recettes[:min(MAX_SLUG, len(liste_recettes))]]
-    print([f"{SITE}{AVIS}{slug}{EXTENSION}" for slug in slugs])
     dico = scrap_data(slugs)
-    print(dico)
     return dico
 
 def ecrire_data(data, filename="datas.json") -> None:
