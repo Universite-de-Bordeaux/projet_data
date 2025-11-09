@@ -4,16 +4,16 @@
 Sur marmiton.org, beaucoup de recettes sont disponibles. Les utilisateurs peuvent partager directement sur la plateforme depuis la section commentaire de chaque recette. On souhaite traiter ses commentaires afin d'en tirer le plus d'informations possibles.
 
 ## Structure du projet
-.
-├── cartographie.py
-├── main.py
-├── README.md
-├── scrapping
-│   ├── const.py
+.  
+├── cartographie.py  
+├── main.py  
+├── README.md  
+├── scrapping  
+│   ├── const.py  
 │   ├── __init__.py
-│   ├── main.py
-│   ├── scrap_com.py
-│   └── scrap_liste_recettes.py
+│   ├── main.py  
+│   ├── scrap_com.py  
+│   └── scrap_liste_recettes.py  
 └── venv.sh
 
 ## Méthode
