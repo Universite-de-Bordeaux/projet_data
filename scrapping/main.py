@@ -2,7 +2,7 @@
 # pylint: disable=line-too-long
 
 import json
-from .const import SITE, AVIS, EXTENSION, MAX_SLUG
+from .const import MAX_SLUG
 from .scrap_data import scrap_data
 from .scrap_liste_recettes import get_all_recipe_slugs
 
