@@ -29,7 +29,8 @@ def projec_pca_interactive(datas, X_tfidf) -> None:
     # Scatter interactif
     fig = px.scatter(
         df, x='x', y='y',
-        hover_data={'comment': True, 'x': False, 'y': False},
+        hover_name='comment',
+        hover_data={'x': False, 'y': False},
         title='Projection PCA interactive des commentaires de marmiton.org'
     )
 
