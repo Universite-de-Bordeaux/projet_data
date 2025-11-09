@@ -55,5 +55,3 @@ def extracte_data_unique(filename="datas.json"):
     except FileNotFoundError:
         print(f"Le fichier {filename} n'existe pas.")
         return {}
-
-extracte_data_unique()
