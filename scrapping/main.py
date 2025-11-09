@@ -18,7 +18,7 @@ def main()->list[str]:
     print(dico)
     return dico
 
-def ecrire_data(data, filename="comments.json") -> None:
+def ecrire_data(data, filename="datas.json") -> None:
     """Écrit les commentaires dans un fichier JSON valide."""
     # data doit être un dictionnaire sous la forme :
     # {com_id: [com_text, com_recipe_id, com_author, com_date], ...}
