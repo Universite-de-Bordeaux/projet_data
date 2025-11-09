@@ -102,7 +102,7 @@ def test_similarite(nlp, doc):
     print(f"text 1 :\n{text_i}\n\n\ntext 2 :\n{text_j}")
     doc2 = nlp(text_i)
     doc3 = nlp(text_j)
-    print(doc3.similarity(doc2))
+    print(f"similarité cosinus : {doc3.similarity(doc2)}")
 
 def test_nommees(doc, label : str | list[str] | None = None):
     """
@@ -128,4 +128,4 @@ def similarite(doc, doc2):
 langage_parser = init_nlp()
 doc1 = make_doc(langage_parser)
 test_similarite(langage_parser, doc1)
-print(test_nommees(doc1, "PER"))
+print(f"\nPersonnage : {test_nommees(doc1, 'PER')}")

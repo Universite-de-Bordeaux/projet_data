@@ -104,3 +104,4 @@ def test():
             occur += " "
 
         print(f"n°{i + 1}{espace}| {mot} | {freq} | {occur} | {occur_chap}")
+test()
