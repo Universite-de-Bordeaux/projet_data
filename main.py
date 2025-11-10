@@ -22,7 +22,7 @@ if __name__ == "__main__":
     for com_id, (text, recipe_id, author, date) in datas.items():
         groupes.setdefault(recipe_id, []).append(text)
     _, X_tfidf = calculer_tfidf(groupes)
-    sauvegarder(X_tfidf, "test.json")
+    sauvegarder(X_tfidf, "comments_by_recipe.json")
     comments_by_recipe = [";".join(texts) for recipe_id, texts in groupes.items()]
     
     # Création de la projection PCA interactive correspondante
@@ -32,5 +32,5 @@ if __name__ == "__main__":
     type(datas)
     coms = [text for text, _, _, _ in datas.values()]
     _, X_tfidf = calculer_tfidf(coms)
-    sauvegarder(X_tfidf, "test.json")
+    sauvegarder(X_tfidf, "coms.json")
     projec_pca_interactive(coms, X_tfidf, "projection_pca_interactive_coms.html")
