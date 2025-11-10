@@ -4,7 +4,7 @@ from scrapping.scrap_data import scrap_data
 from scrapping.scrap_liste_recettes import get_all_recipe_slugs
 from tfidf import calculer_tfidf, sauvegarder
 from cartographie import projec_pca_interactive
-from reader_data import read_data
+from reader_data import read_data, extracte_data_unique
 
 def gen_data():
     """ Pour générer le fichier datas.json """
@@ -15,6 +15,7 @@ def gen_data():
 if __name__ == "__main__":
     # gen_data()
     datas = read_data()
+    extracte_data_unique()
     print(f"Total commentaires récupérés : {len(datas)}")
 
     # Calcul du TF-IDF sur les commentaires agrégés par recette
