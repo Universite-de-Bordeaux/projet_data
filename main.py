@@ -34,6 +34,3 @@ if __name__ == "__main__":
     _, X_tfidf = calculer_tfidf(coms)
     sauvegarder(X_tfidf, "test.json")
     projec_pca_interactive(coms, X_tfidf, "projection_pca_interactive_coms.html")
-
-    # Création de la projection PCA interactive correspondante
-    projec_pca_interactive(coms, X_tfidf)
