@@ -17,11 +17,21 @@ if __name__ == "__main__":
     datas = read_data()
     print(f"Total commentaires récupérés : {len(datas)}")
 
-    # Calcul du TF-IDF
+    # Calcul du TF-IDF sur les commentaires agrégés par recette
     groupes = {}
     for com_id, (text, recipe_id, author, date) in datas.items():
         groupes.setdefault(recipe_id, []).append(text)
     _, X_tfidf = calculer_tfidf(groupes)
+    comments_by_recipe = [";".join(texts) for recipe_id, texts in groupes.items()]
+    
+    # Création de la projection PCA interactive correspondante
+    projec_pca_interactive(comments_by_recipe, X_tfidf)
 
-    # Création de la projection PCA interactive
-    projec_pca_interactive(datas, X_tfidf)
+    # Calcul du TF-IDF sur les commentaires
+    type(datas)
+    coms = [text for text, _, _, _ in datas.values()]
+    _, X_tfidf = calculer_tfidf(coms)
+    projec_pca_interactive(coms, X_tfidf, "projection_pca_interactive_coms.html")
+
+    # Création de la projection PCA interactive correspondante
+    projec_pca_interactive(comments_by_recipe, X_tfidf)
