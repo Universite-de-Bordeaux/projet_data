@@ -2,7 +2,7 @@
 from scrapping.main import ecrire_data
 from scrapping.scrap_data import scrap_data
 from scrapping.scrap_liste_recettes import get_all_recipe_slugs
-from tfidf import calculer_tfidf
+from tfidf import calculer_tfidf, sauvegarder
 from cartographie import projec_pca_interactive
 from reader_data import read_data
 
@@ -22,6 +22,7 @@ if __name__ == "__main__":
     for com_id, (text, recipe_id, author, date) in datas.items():
         groupes.setdefault(recipe_id, []).append(text)
     _, X_tfidf = calculer_tfidf(groupes)
+    sauvegarder(X_tfidf, "test.json")
     comments_by_recipe = [";".join(texts) for recipe_id, texts in groupes.items()]
     
     # Création de la projection PCA interactive correspondante
@@ -31,7 +32,8 @@ if __name__ == "__main__":
     type(datas)
     coms = [text for text, _, _, _ in datas.values()]
     _, X_tfidf = calculer_tfidf(coms)
+    sauvegarder(X_tfidf, "test.json")
     projec_pca_interactive(coms, X_tfidf, "projection_pca_interactive_coms.html")
 
     # Création de la projection PCA interactive correspondante
-    projec_pca_interactive(comments_by_recipe, X_tfidf)
+    projec_pca_interactive(coms, X_tfidf)
