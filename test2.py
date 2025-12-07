@@ -158,7 +158,6 @@ def test2(significatif_occ = 10, significatif_freq = 0.02):
     sizefreq = 20
     sizeocc = 18
     size1 = 7
-    F = 0
     print("indice | mot               | fréquence            | nombre d'occurence\n")
     for i in range(len(mots_portion_sorted)):
         nb_espace = size1
@@ -176,7 +175,6 @@ def test2(significatif_occ = 10, significatif_freq = 0.02):
             mot += " "
 
         freq = mots_portion_sorted[i][1]
-        F += freq
         if freq < significatif_freq:
             print("fréquence trop basse")
             break
@@ -195,7 +193,6 @@ def test2(significatif_occ = 10, significatif_freq = 0.02):
             occur += " "
 
         print(f"n°{i + 1}{espace}| {mot} | {freq} | {occur}")
-    print(F)
 if __name__ == "__main__":
     test(significatif_occ = 5, significatif_freq = 0.05, significatif_par_chap = 1.5, nb_chapitre = NB_CHAPITRE_NO_SPOIL)
     test2(significatif_occ = 5, significatif_freq = 0.05)
