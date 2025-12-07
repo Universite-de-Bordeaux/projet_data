@@ -21,13 +21,15 @@ def scrap_data_from_url(slug:str)->dict[int : str, str, str, str]:
     driver.get(url)
 
     soup = BeautifulSoup(driver.page_source, "html.parser")
-    coms = soup.find_all("p", class_="recipe-reviews-list__review__text")
-    pseudos = soup.find_all("div", class_="recipe-reviews-list__review__nickname")
-    dates = soup.find_all("div", class_="recipe-reviews-list__review__creation-date")
+    coms = soup.find_all("div", class_="review__content")
+    pseudos = soup.find_all("div", class_="review__author-pseudonyme")
+    dates = soup.find_all("div", class_="review__date")
 
+    print(f"Scrapping de la recette {slug} avec {len(coms)} commentaires.")
     for com, pseudo, date in zip(coms, pseudos, dates):
         data[COMPTEUR] = [com.get_text().strip(), slug, pseudo.get_text().strip(), date.get_text().strip()]
         COMPTEUR += 1
+        print(COMPTEUR)
 
     driver.quit()
     return data
