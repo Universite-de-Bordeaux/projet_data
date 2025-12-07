@@ -1,3 +1,4 @@
+from numpy import character
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 NB_CHAPITRE_NO_SPOIL = 3
@@ -6,7 +7,20 @@ NB_CHAPITRE_NO_SPOIL = 3
 def extract_text(FileName="Partie 1 Luc et Mélissa.txt", spoil = NB_CHAPITRE_NO_SPOIL):
     with open(FileName, "r", encoding="utf-8") as f:
         contenu = f.read()
+        if FileName == "Partie 1 Luc et Mélissa.txt":
+            contenu = dechiffre(contenu, 1)
     return tronque_spoil(contenu, spoil)
+
+def dechiffre(text, decallage):
+    result = ""
+    mot = ""
+    for letter in text:
+        if letter == " ":
+            result += chr(int(mot) + decallage)
+            mot = ""
+        else:
+            mot += letter
+    return result
 
 def tronque_spoil(contenu, nb_chapitre_max):
     retour = ""
