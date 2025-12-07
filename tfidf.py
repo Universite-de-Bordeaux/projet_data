@@ -3,9 +3,9 @@
 import json
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-def calculer_tfidf(corpus: list[str]):
+def calculer_tfidf(corpus: list[str], stop_words:str | list[str] = None, min_df:int = 1, max_df:float = 1.0):
     """Calcule la matrice TF-IDF pour un corpus donné"""
-    tfidf = TfidfVectorizer()
+    tfidf = TfidfVectorizer(stop_words=stop_words, min_df=min_df, max_df=max_df)
     X_tfidf = tfidf.fit_transform(corpus) # pylint:disable=invalid-name
     return tfidf, X_tfidf
 
