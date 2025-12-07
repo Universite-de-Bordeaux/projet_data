@@ -10,12 +10,15 @@ def read_data(filename="datas.json") -> dict:
 
         data = {}
         for com in json_data:
-            data[com["com_id"]] = [
-                com["com_text"],
-                com["com_recipe_id"],
-                com["com_author"],
-                com["com_date"]
-            ]
+            try:
+                data[com["com_id"]] = [
+                    com["com_text"],
+                    com["com_recipe_id"],
+                    com["com_author"],
+                    com["com_date"]
+                ]
+            except :
+                continue
         return data
 
     except FileNotFoundError:
