@@ -5,3 +5,4 @@ AVIS = "recette-avis_"
 EXTENSION = ".aspx"
 MAX_WORKERS = 10
 MAX_SLUG = 100
+DO_PRINT = False
