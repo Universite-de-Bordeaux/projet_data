@@ -1,5 +1,6 @@
-from numpy import character
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+from main import read_data
 
 NB_CHAPITRE_NO_SPOIL = 3
 
@@ -114,5 +115,87 @@ def test(significatif_occ = 0, significatif_freq = 0., significatif_par_chap = 0
             occur += " "
 
         print(f"n°{i + 1}{espace}| {mot} | {freq} | {occur} | {occur_chap}")
+
+def test2(significatif_occ = 10, significatif_freq = 0.02):
+    datas = read_data("datas/datas_1000_slugs.json")
+    contenu = [";".join([text for text, _, _, _ in datas.values()])]
+
+    stop_words_fr = [
+        "le", "la", "les", "de", "des", "du", "un", "une",
+        "et", "en", "dans", "au", "aux", "ce", "cet", "cette",
+        "il", "elle", "ils", "elles", "nous", "vous", "je", "tu",
+        "se", "sa", "son", "ses", "leur", "leurs", "y", "à", "pour",
+        "que", "qu", "lui", "qui", "sur", "par", "'", ".", ",", ";", "ton",
+        "tes", "ta", "me", "nos", "vos", "notre", "votre", "ces", "on", "\"",
+        "très", "ai", "est", "avec", "peu", "bien", "plus", "ça", "mis", "sont",
+        "fois", "était", "ma", "mon", "mes", "\n"
+    ]
+
+    # Vectorisation
+    vectorizer = CountVectorizer(stop_words = stop_words_fr)
+    X = vectorizer.fit_transform(contenu)
+
+    # Récupération du vocabulaire et des fréquences
+    mots = vectorizer.get_feature_names_out()
+    frequences = X.toarray()[0]
+
+    # Associer mots et fréquences
+    mots_freq = list(zip(mots, frequences))
+
+    # Trier par fréquence décroissante
+    mots_freq_sorted = sorted(mots_freq, key=lambda x: x[1], reverse=True)
+
+    tfidf = TfidfVectorizer(stop_words = stop_words_fr)
+    X_tfidf = tfidf.fit_transform(contenu)
+
+    portion = X_tfidf.toarray()[0]
+    mots_portion = list(zip(mots, portion))
+
+    mots_portion_sorted = sorted(mots_portion, key=lambda x: x[1], reverse=True)
+
+    # Afficher les 20 mots les plus fréquents
+    sizemot = 17
+    sizefreq = 20
+    sizeocc = 18
+    size1 = 7
+    F = 0
+    print("indice | mot               | fréquence            | nombre d'occurence\n")
+    for i in range(len(mots_portion_sorted)):
+        nb_espace = size1
+        nb_espace -= 3
+        if i >= 9:
+            nb_espace -= 1
+        if i >= 99:
+            nb_espace -= 1
+        if i >= 999:
+            nb_espace -= 1
+        espace = " " * nb_espace
+
+        mot = mots_portion_sorted[i][0]
+        while len(mot) < sizemot:
+            mot += " "
+
+        freq = mots_portion_sorted[i][1]
+        F += freq
+        if freq < significatif_freq:
+            print("fréquence trop basse")
+            break
+
+        freq = str(freq)
+        while len(freq) < sizefreq:
+            freq += " "
+
+        occur = mots_freq_sorted[i][1]
+        if occur < significatif_occ:
+            print("nombre d'occurence trop faible")
+            break
+
+        occur = str(occur)
+        while len(occur) < sizeocc:
+            occur += " "
+
+        print(f"n°{i + 1}{espace}| {mot} | {freq} | {occur}")
+    print(F)
 if __name__ == "__main__":
     test(significatif_occ = 5, significatif_freq = 0.05, significatif_par_chap = 1.5, nb_chapitre = NB_CHAPITRE_NO_SPOIL)
+    test2(significatif_occ = 5, significatif_freq = 0.05)

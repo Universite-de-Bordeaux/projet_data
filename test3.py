@@ -4,6 +4,7 @@ import spacy
 from spacy.language import Language
 from spacy.pipeline import Sentencizer
 from test2 import extract_text
+from main import read_data
 
 # Charger le modèle français
 # fr_core_news_sm <= python -m spacy download fr_core_news_sm
@@ -57,11 +58,14 @@ def make_doc(nlp, caractere_invalide = ("«", "»", "\"", "(", ")"), caractere_a
     """
     if extension == ".txt":
         brut = extract_text(Filename)
+    elif extension == ".json":
+        datas = read_data(Filename + extension)
+        brut = [";".join([text for text, _, _, _ in datas.values()])][:50]
     else:
         brut = "Pas encore codé mdr"
     text_filtre = ""
-    for l in brut:
-        if caractere_a_remplacer is not None and l in caractere_a_remplacer:
+    for l in brut[0]:
+        if caractere_a_remplacer is not None and l in caractere_a_remplacer.keys():
             text_filtre += caractere_a_remplacer[l]
         elif caractere_invalide is None or l not in caractere_invalide:
             text_filtre += l
@@ -130,6 +134,7 @@ def similarite(doc, doc2):
 
 if __name__ == "__main__":
     langage_parser = init_nlp(ponctuation = (".", "!", "?", "...", "«", "»", "\n"))
-    doc1 = make_doc(langage_parser, caractere_invalide = ("«", "»", "\"", "(", ")"), caractere_a_remplacer= {"\n" : " "})
+    doc1 = make_doc(langage_parser, caractere_invalide = ("«", "»", "\"", "(", ")"), caractere_a_remplacer= {"\n" : " ", ";" : "\n"},
+                    Filename="datas/datas_1000_slugs", extension = ".json")
     test_similarite(langage_parser, doc1)
-    print(f"\nPersonnages : {test_nommees(doc1, 'PER')}")
+    print("\n\n" + str(doc1))
