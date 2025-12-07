@@ -12,4 +12,5 @@ pip install numpy
 pip install matplotlib
 pip install spacy
 pip install plotly
+pip install stop-words
 python -m spacy download fr_core_news_md
