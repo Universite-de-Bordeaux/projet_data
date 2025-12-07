@@ -1,7 +1,7 @@
 """ tfidf.py """
 
-from sklearn.feature_extraction.text import TfidfVectorizer
 import json
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 def calculer_tfidf(corpus: list[str]):
     """Calcule la matrice TF-IDF pour un corpus donné"""
@@ -9,7 +9,8 @@ def calculer_tfidf(corpus: list[str]):
     X_tfidf = tfidf.fit_transform(corpus) # pylint:disable=invalid-name
     return tfidf, X_tfidf
 
-def sauvegarder(X_tfidf, filename = "tfidf.json"):
+def sauvegarder_tfidf(X_tfidf, filename = "tfidf.json"):
+    """ Sauvegarde la matrice TF-IDF au format JSON """
     json_data = [{
                     "longueur": X_tfidf.shape[0],
                     "largeur": X_tfidf.shape[1],
@@ -28,15 +29,15 @@ def sauvegarder(X_tfidf, filename = "tfidf.json"):
         json.dump(json_data, f, indent=4, ensure_ascii=False)
 
 def load_matrice(filename = "tfidf.json"):
+    """ Charge la matrice TF-IDF depuis un fichier JSON """
     with open(filename, "r", encoding="utf-16") as f:
         json_data = json.load(f)
 
     size = json_data.pop(0)
     matrix = []
-    for i in range(size["longueur"]):
+    for _ in range(size["longueur"]):
         l = [0] * size["largeur"]
         matrix.append(l)
     for data in json_data:
         matrix[data["x"]][data["y"]] = data["valeur"]
     return matrix
-
