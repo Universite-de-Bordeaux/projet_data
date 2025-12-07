@@ -24,7 +24,7 @@ def gen_data():
 if __name__ == "__main__":
     # gen_data()
     # ecrire_data_safe("datas/datas_all_slugs.json", nb_workers=15, max_slugs=100000)
-    datas = read_data("output2.txt")
+    datas = read_data("datas/datas_27_000_slugs_presque_corrige.json")
     # extracte_data_unique()
     print(f"Total commentaires récupérés : {len(datas)}")
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     # Calcul du TF-IDF sur les commentaires
     coms = [text for text, _, _, _ in datas.values()]
-    vectorizer, X_tfidf = calculer_tfidf(coms, stop_words=get_stop_words('french') + mot_local , min_df=5, max_df=0.9, )
+    vectorizer, X_tfidf = calculer_tfidf(coms, stop_words=get_stop_words('french') + mot_local , min_df=5, max_df=0.9)
     N_CLUSTERS = 3
     clusters = a_sentiments(X_tfidf, N_CLUSTERS, random_state=42)
 
