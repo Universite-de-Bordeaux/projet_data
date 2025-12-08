@@ -117,7 +117,7 @@ def test(significatif_occ = 0, significatif_freq = 0., significatif_par_chap = 0
         print(f"n°{i + 1}{espace}| {mot} | {freq} | {occur} | {occur_chap}")
 
 def test2(significatif_occ = 10, significatif_freq = 0.02):
-    datas = read_data("datas/datas_1000_slugs.json")
+    datas = read_data("datas/datas_27_000_slugs_presque_corrige.json")
     contenu = [";".join([text for text, _, _, _ in datas.values()])]
 
     stop_words_fr = [

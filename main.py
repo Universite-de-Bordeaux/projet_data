@@ -25,7 +25,7 @@ if __name__ == "__main__":
     # gen_data()
     # ecrire_data_safe("datas/datas_all_slugs.json", nb_workers=15, max_slugs=100000)
     datas = read_data("datas/datas_27_000_slugs_presque_corrige.json")
-    # extracte_data_unique()
+    extracte_data_unique("datas/datas_27_000_slugs_presque_corrige.json")
     print(f"Total commentaires récupérés : {len(datas)}")
 
     # # Calcul du TF-IDF sur les commentaires agrégés par recette

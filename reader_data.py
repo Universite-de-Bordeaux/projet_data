@@ -38,21 +38,22 @@ def extracte_data_unique(filename="datas.json"):
         set_recipe = set()
         set_author = set()
         set_date = set()
+        c2 = 0
         for com in json_data:
-            set_commentaire.add(com["com_text"])
-            set_recipe.add(com["com_recipe_id"])
-            set_author.add(com["com_author"])
-            set_date.add(com["com_date"])
+            try:
+                set_commentaire.add(com["com_text"])
+                set_recipe.add(com["com_recipe_id"])
+                set_author.add(com["com_author"])
+                set_date.add(com["com_date"])
+            except:
+                c2 += 1
             c += 1
-        #print(set_commentaire)
-        print(set_recipe)
-        print(set_author)
-        print(set_date)
-        print(f"{c} commentaires extrait depuis {filename}.")
-        print(f"{len(set_commentaire)} commentaires unique.")
-        print(f"{len(set_recipe)} recette unique.")
-        print(f"{len(set_author)} auteur unique.")
-        print(f"{len(set_date)} dates unique.")
+        print(f"{c} commentaires extrait depuis {filename}")
+        print(f"{len(set_commentaire)} commentaires uniques")
+        print(f"{len(set_recipe)} recettes uniques")
+        print(f"{len(set_author)} auteurs uniques")
+        print(f"{len(set_date)} dates uniques")
+        print(f"{c2} commentaires invalides")
         return c, len(set_commentaire), len(set_recipe), len(set_author), len(set_date)
 
     except FileNotFoundError:
