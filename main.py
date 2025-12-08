@@ -55,5 +55,5 @@ if __name__ == "__main__":
     for cluster_id, keywords_list in keywords.items():
         print(f"Cluster {cluster_id} : {', '.join(keywords_list)}")
 
-    projec_pca_interactive(coms, X_tfidf, "proj_pca.html")
-    projec_pca_interactive(coms, X_tfidf, "proj_pca_clusters.html", clusters)
+    #projec_pca_interactive(coms, X_tfidf, "proj_pca.html")
+    #projec_pca_interactive(coms, X_tfidf, "proj_pca_clusters.html", clusters)
