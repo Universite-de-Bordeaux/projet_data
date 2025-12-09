@@ -59,9 +59,14 @@ def ecrire_data_safe(filename="datas.json", nb_workers=MAX_WORKERS, max_slugs=MA
         with write_lock:
             with open(filename, "a", encoding="utf-16") as f:
                 for key, value in data.items():
+                    com_text = value[0]
+                    com_text = com_text.replace("\t", " ")
+                    com_text = com_text.replace("\n", "")
+                    com_text = com_text.replace("\\", "/")
+                    com_text = com_text.replace('"', "'")
                     f.write("{\n")
                     f.write(f'\t"com_id" : "{key}",\n')
-                    f.write(f'\t"com_text" : "{value[0]}",\n')
+                    f.write(f'\t"com_text" : "{com_text}",\n')
                     f.write(f'\t"com_recipe_id" : "{value[1]}",\n')
                     f.write(f'\t"com_author" : "{value[2]}",\n')
                     f.write(f'\t"com_date" : "{value[3]}"\n')
@@ -75,3 +80,4 @@ def ecrire_data_safe(filename="datas.json", nb_workers=MAX_WORKERS, max_slugs=MA
 if __name__ == "__main__":
     datas = main()
     ecrire_data(datas)
+
