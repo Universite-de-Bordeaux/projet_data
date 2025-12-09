@@ -1,8 +1,8 @@
-""" Fichier contenant la/les fonction(s) de clustering des sentiments """
+""" Fichier contenant la/les fonction(s) de kmeans """
 from sklearn.cluster import KMeans
 import numpy as np
 
-def a_sentiments(tfidf_matrix, n_clusters=3, random_state=42):
+def clustering(tfidf_matrix, n_clusters=3, random_state=42):
     """Effectue le clustering K-Means sur la matrice TF-IDF donnée"""
     # Cette fonction regroupe les documents en n_clusters clusters basés sur leurs caractéristiques TF-IDF.
     # KMeans utilise de l'aléatoire, on fixe une graine par défaut pour la reproductibilité.

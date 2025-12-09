@@ -6,7 +6,7 @@ from scrapping.main import ecrire_data, ecrire_data_safe
 from scrapping.scrap_data import scrap_data
 from scrapping.scrap_liste_recettes import get_all_recipe_slugs
 from tfidf import calculer_tfidf, sauvegarder_tfidf
-from sentiments import a_sentiments, mots_caracteristiques_kmeans
+from kmeans import clustering, mots_caracteristiques_kmeans
 from cartographie import projec_pca_interactive
 from reader_data import read_data, extracte_data_unique
 
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     coms = [text for text, _, _, _ in datas.values()]
     vectorizer, X_tfidf = calculer_tfidf(coms, stop_words=get_stop_words('french') + mot_local , min_df=5, max_df=0.9)
     N_CLUSTERS = 3
-    clusters = a_sentiments(X_tfidf, N_CLUSTERS, random_state=42)
+    clusters = clustering(X_tfidf, N_CLUSTERS, random_state=42)
 
     keywords = mots_caracteristiques_kmeans(
         kmeans=KMeans(n_clusters=N_CLUSTERS).fit(X_tfidf),
