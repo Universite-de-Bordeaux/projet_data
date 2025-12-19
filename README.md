@@ -12,31 +12,31 @@ et d'en extraire des informations utiles.
 
 ## Structure
 .  
-├── datas
-├── cartographie.py  
-├── fixjson.py
-├── kmeans.py
+├── datas  
+├── cartographie.py   
+├── fixjson.py  
+├── kmeans.py  
 ├── main.py  
 ├── README.md  
-├── Partie 1 Luc et Mélissa.txt
-├── projections
-├── proj_pca_clusters.html
-├── proj_pca.html
-├── reader_data.py
+├── Partie 1 Luc et Mélissa.txt  
+├── projections  
+├── proj_pca_clusters.html  
+├── proj_pca.html  
+├── reader_data.py  
 ├── scrapping  
-│   ├── __init__.py  
+│   ├── __init__.py   
 │   ├── const.py  
 │   ├── main.py  
-│   ├── scrap_data.py  
+│   ├── scrap_data.py    
 │   └── scrap_liste_recettes.py  
-├── README.md
-├── scrapping
-├── test2.py
-├── test3.py
-├── test.py
-├── tfidf
-├── tfidf.py
-└── venv.sh
+├── README.md  
+├── scrapping  
+├── test2.py  
+├── test3.py  
+├── test.py  
+├── tfidf  
+├── tfidf.py  
+└── venv.sh  
 
 ## Méthode
 
